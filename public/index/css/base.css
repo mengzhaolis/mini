@@ -1,0 +1,51 @@
+@charset "utf-8";
+* {
+	-webkit-tap-highlight-color: transparent;
+	}
+html{
+	font-size: 62.5%
+}
+body, ul, p, h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: PingFangSC-Regular, Helvetica, "Droid Sans", Arial, sans-serif;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+input {
+	display: block;
+	padding: 0;
+	margin: 0;
+	border: 0 none;
+	outline: none;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-appearance: none;
+}
+.clearfix:after {content: '.'; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.viewport {
+	width: 100%;
+	margin: 0px auto;
+	overflow: hidden;
+}
+.w{
+	margin:0 10px;
+}
+

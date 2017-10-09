@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form>   
+        <tr>
+            <td>文件上传</td>
+            <td><input type="file" id="img" name="images" class="a">
+                <div  style="width:50px; height:30px;">
+                    <img class="as" src="C:\fakepath\jiu1 (3).jpg" alt="">
+                </div>
+            </td>
+        </tr>
+        <br />
+        <tr>
+            <td><input type="button" id="ti" value="提交"></td>
+        </tr>
+    </form>
+</body>
+<script src="../../js/jquery-2.1.4.min.js"></script>
+<script>
+    $(".a").change(function(){
+        var img = $("#img").val();  
+        // alert(img) 
+        $(".as").attr('src',img);
+    })
+    // $("#ti").click(function(){
+    //     var img = $("#img").val();
+    //     url="{:url('/up')}";
+    //     data={"img":img};
+    //     $.post(url,data,function(msg){
+    //         // alert(msg)
+    //         $(".a").after("<img src="+img+" width=50px; height=30px; >");
+    //     });
+    //     // alert(img)
+    // });
+</script>
+</html>

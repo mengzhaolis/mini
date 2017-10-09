@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html data-basewidth="750">
+<head lang="en">
+    <title>兴朋会首页</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="__CSS__/base.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+    <link rel="stylesheet" href="__CSS__/swiper.css">
+    <script type="text/javascript" src="__JS__/jquery.js"></script>
+    <script type="text/javascript" src="__JS__/swiper.js"></script>
+    <script src="__JS__/xingpenghui.js"></script>
+  </head>
+<body>
+<div class="top_head">
+  <img src="__IMG__/m_index/logo.png" height="254" width="320" alt="">
+  <span><input type="text" placeholder="搜索您要的蔬菜"></span>
+</div>
+<!--!&#45;&#45;轮播图&ndash;&gt;-->
+<div class="swiper-container swiper-container1">
+       <div class="swiper-wrapper" style="width: 100%;">
+           {volist name="banner" id="banner"}
+                <div class="swiper-slide" style="width: 100%;"><a href="{:url('/details',array('id'=>$banner['i_id']))}"><img src="{$banner.banner_path}" style="width: 100%;"></a></div>
+           {/volist}
+       </div>
+       <div class="swiper-pagination swiper-p1"></div><!--分页器-->
+   </div>
+<!--主题-->
+<div class="zhuti">
+    <img src="__IMG__/m_index/555.png" alt=""/>
+    <h1>主题</h1>
+</div>
+<div class="zhuti_xiangqing">
+    <ul>
+        <li>
+            <ul class="lalala">
+                <li><img src="__IMG__/m_index/xianggua3.jpg" alt=""/></li>
+                <li><img src="__IMG__/m_index/yangjiaocui1.jpg" alt=""/></li>
+            </ul>
+        </li>
+        <li><img src="__IMG__/m_index/huanggua3.jpg" alt=""/></li>
+    </ul>
+</div>
+<!--主题-->
+<div class="zhuti">
+    <img src="__IMG__/m_index/555.png" alt=""/>
+    <h1>商品</h1>
+</div>
+<div class="zhuti_xiangqing">
+    <ul>
+        <li>
+            <ul class="lalala">
+                <li><img src="__IMG__/m_index/xianggua3.jpg" alt=""/></li>
+                <li><img src="__IMG__/m_index/yangjiaocui1.jpg" alt=""/></li>
+                <li><img src="__IMG__/m_index/yangjiaocui1.jpg" alt=""/></li>
+                <li><img src="__IMG__/m_index/xianggua3.jpg" alt=""/></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+</body>
+{include file="../application/mini/view/index/foot.html" /}
+
+<script type="text/javascript">
+    var Swiper1 = new Swiper(".swiper-container1",{
+        pagination: '.swiper-p1',
+        direction:"horizontal",/*横向滑动*/
+        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/
+        autoplay:3000/*每隔3秒自动播放*/
+    })
+</script>
+</html>

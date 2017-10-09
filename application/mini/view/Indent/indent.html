@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>提交订单</title>
+    <link rel="stylesheet" href="__CSS__/indent/base.css">
+    <link rel="stylesheet" href="__CSS__/indent/submitorder.css">
+    <script src="__JS__/jquery.js"></script>
+</head>
+<body>
+<!--确认订单部分-->
+
+<div class="shure">
+    <img src="__IMG__/indent/return.png" alt=""/>
+    <p>联系电话：18310568509</p>
+</div>
+<!--收货人的信息-->
+<div style="text-algin:center;background-color:#FA5500">
+    <span class="deng">等待买家付款</span>
+    <div id="timer">
+    <input type="hiddent" id="times" value="{$data.no_time}">
+    <script>
+        var maxtime;
+        if(window.name==''){ 
+            maxtime = $("#times").val();
+        }else{
+            maxtime = window.name;
+        }
+        
+        function CountDown(){
+        if(maxtime>=0){       
+            hours = Math.floor(maxtime/3600);
+            // console.log(hours)
+            minute=maxtime -  Math.floor(maxtime/3600)*3600
+            minutes = Math.floor(minute/60);
+            seconds = Math.floor(maxtime%60);
+            msg = "剩于"+hours+"时"+minutes+"分"+seconds+"秒自动关闭";
+            document.all["timer"].innerHTML = msg;
+            document.getElementById("timer").innerHTML = msg;
+            --maxtime;
+            window.name = maxtime; 
+        }
+        else{
+                clearInterval(timer);
+                $('.deng').html('交易关闭');
+                $("#go").attr("disabled", true); 
+            }
+        }
+            timer = setInterval("CountDown()",1000);
+    </script>
+</div>
+</div>
+
+<div class="consignee">
+    <div class="xiangxi_xinxi">
+         <span>收货人：梦中阿里</span>
+         <p>电话：18440572573</p>
+    </div>
+    <img src="__IMG__/indent/adress.png" alt=""/>
+    <span class="adress">
+        收货地址：辽宁省凌源市十里河洪山家园乐乐乐乐乐乐乐乐
+    </span>
+</div>
+<img src="__IMG__/indent/tiaotiao_02.jpg" alt=""/>
+<div class="hengxian"></div>
+<!--购买信息-->
+<div class="goumai_xinxi">
+    <div style="height: 40px;">
+        <img src="__IMG__/indent/shop.png" alt="" class="dianpu"/>
+        <p>店铺名称</p>
+    </div>
+    <form action="{:url('/alipay')}" method="post" onsubmit="return tijiao()">
+        <div class="juti">
+        <img src="__IMG__/indent/xianggua.png" alt=""/>
+        <p class="jieshao">
+            <input type="text" class="jieshao_01" name="goods_name" readonly="readonly" value="{$data.insence_name}"> <br/>
+            <input type="hidden" name="indent_id" value="{$data.id}">
+            <input type="hidden" name="hao" value="{$data.indent_hao}">
+            <!--<input type="hidden" name="">-->
+            <span class="taocan_leixing">{$goods.canshu}</span> <br/>
+            ￥<input type="text" name="jiage" class="jiage" readonly="readonly" value="{$goods.jiage}.00"> 
+            <!--<span class="jiage">{$data.insence_cost}.00</span>-->
+            <span style="margin-left:230px;">× </span><span class="fenshu">{$data.insence_num}</span>
+        </p>
+    </div>
+    <div class="goumai_shuliang">
+          <p class="buy">购买数量</p>
+          <p class="shuju">
+              <span class="jian" onclick="minus()">-</span>
+              <input type="number" name="num" class="shuzi" id="num" value="{$data.insence_num}">
+              <!--<span class="shuzi" id="num">{$data.insence_num}</span>-->
+              <span class="jia" onclick="plus()">+</span>
+          </p>
+      </div>
+    <div class="heji">
+       <input type="submit" id="go" value="提交"/>
+        <p><span>合计：</span>￥ <span class="hejies" style="color:red"></span></p>
+    </div>
+        <input type="hidden" class="zongjia" name="zongjia" value="">
+    </form>
+    
+    </div>
+
+</div>
+</body>
+<script>
+    $(function(){
+        var jiage = $(".jiage").val();
+        // alert(jiage)
+        var num = $('.fenshu').text();
+        var heji = jiage*num;
+        var heji = heji+".00";
+        $('.hejies').append(heji)
+    })
+    function plus(){
+        // alert(0);
+        var num = document.getElementById("num");
+        var new_num = document.getElementById("num").value;
+        // alert(new_num)
+           new_num++;
+            var jiage = $(".jiage").val();
+            var heji =new_num*jiage;
+            var heji = heji+".00";
+            $('.fenshu').html(new_num);
+            $('.hejies').text(heji);
+            num.innerHTML = num.value++;
+       
+    }
+    //商品数量减少
+    function minus(){
+        var num = document.getElementById("num");
+        var new_num = document.getElementById("num").value;
+        var jiage = $(".jiage").val();
+        if(new_num-- <1)
+          {
+              new_num=0;
+          }
+        var heji =new_num*jiage;
+        var heji = heji+".00";
+        $('.fenshu').html(new_num);
+        $('.hejies').text(heji);
+        // alert(num.value);
+        if(num.value<=1){
+            num.innerHTML = 1;
+            $('.fenshu').html(1);
+            $('.hejies').text(jiage);
+        }else{
+            num.innerHTML = num.value--;
+        }
+        
+    }
+    function tijiao()
+    {
+        // alert(1)
+        var zong = $('.hejies').text();
+         var new_num = document.getElementById("num").value;
+        var zong = 0.01*new_num;
+        // alert(zong)
+        $('.zongjia').val(zong);
+        // return false;
+    }
+</script>
+</html>

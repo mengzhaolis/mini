@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+
+	<title>登录=>注册</title>
+
+	<!-- Meta-Tags -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //Meta-Tags -->
+
+	<!-- Style --> <link rel="stylesheet" href="__CSS__/styles.css" type="text/css" media="all">
+
+
+
+</head>
+<!-- //Head -->
+
+<!-- Body -->
+
+<body>
+
+	<h1>登录=>表单</h1>
+
+	<div class="container w3layouts agileits">
+
+		<div class="login w3layouts agileits">
+		
+			<div class="clear"></div>
+		</div><div class="copyrights"></div>
+		<div class="register w3layouts agileits">
+			<h2>注 册</h2>
+			<form action="add" method="post" onsubmit="return tijiao()" >
+				<input type="text" id="username" Name="username" placeholder="用户名" value="" onchange="user()">
+				<input type="text" id="e_email" Name="e_mail" placeholder="邮箱" value="" onchange="email()">
+				<input type="password" id="pass" Name="password" placeholder="密码" value="" onchange="passes()">
+				<input type="text" id="phone" Name="phone" placeholder="手机号码" value="" onchange="phones()">
+			
+			<div class="send-button w3layouts agileits">
+				
+					<input type="submit" value="免费注册">
+			</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="clear"></div>
+
+	</div>
+
+	<div class="footer w3layouts agileits">
+		
+	</div>
+
+</body>
+<!-- //Body -->
+<script src="__JS__/jquery.js"></script>
+<script>
+    function user()
+    {
+        var username = $("#username").val();
+        if(username == false)
+        {
+            alert('用户名不能为空！！！');
+            return false;
+        }
+        var chinese = /^[\u4E00-\u9FA5]{1,6}$/;
+        var english = /^[a-zA-Z0-9]{1,10}$/;
+        if(chinese.test(username) == false)
+        {
+            if(english.test(username) == false)
+            {
+                alert('请按规则进行录入')
+            }
+        }else
+        {
+            return true;
+        }
+        
+    }
+    function email()
+    {
+        var email = $("#e_email").val();
+        if(email==false)
+        {
+            alert('邮箱不能为空');
+            return false;
+        }
+        var emails = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+        if(emails.test(email) ==false )
+        {
+            alert('邮箱地址不正确！！！');
+            return false;
+        }
+    }
+    function passes()
+    {
+        var pass = $("#pass").val();
+        if(pass==false)
+        {
+            alert('密码不能为空');
+            return false;
+        }
+        var password = /^[a-zA-Z0-9]{1,6}$/;
+        if(password.test(pass) == false)
+        {
+            alert('密码不能超过六位')
+        }
+
+    }
+    function phones()
+    {
+        var phone = $("#phone").val();
+        var phoney = /^1[34578]\d{9}$/;
+        if(phoney.test(phone) == false)
+        {
+            alert('手机号不正确');
+            return false;
+        }
+    }
+    function tijiao()
+    {
+        var username = $("#username").val();
+        var email = $("#e_email").val();
+        var pass = $("#pass").val();
+        var phone = $("#phone").val();
+        if(username==false || email==false || pass==false||phone==false)
+        {
+            alert('所有数据不能为空');
+            return false;
+        }
+    }
+</script>
+</html>

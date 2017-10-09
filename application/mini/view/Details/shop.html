@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <meta http-equiv="Content-Type" content="textml; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta content="telephone=no" name="format-detection">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="__JS__/box.js"></script>
+    <link rel="stylesheet" href="__CSS__/m_reset.css">
+    <link rel="stylesheet" href="__CSS__/lanrenzhijia.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="wrap">
+            <ul class="box">
+              {volist name="data" id="data"}
+                <li class="swiper-slide" style="width: 100%;"><img src="{$data.img_path}" style="width: 100%;">
+                <input type="hidden" id="i_id" value="{$data.id}">
+                </li>
+              {/volist}
+        </ul>
+        </div>
+        <section>
+            <div class="prodectName">
+                <span id="name"> {$goods.name}</span>
+               <input type="hidden" id="user" value="<?php echo session('username'); ?>">
+            </div>
+            <div class="prodectPrice">
+                <span>￥</span><span id="jiage">{$goods.jiage}</span>
+            </div>
+            <div class="prodectNum">
+                <span onclick="minus()">-</span>
+                <input type="number" class="num" id="num" value="0">
+                <input type="hidden" id="goods_num" value="{$goods.kucun}">
+                <!--<input type="hidden" id="user_id" value="{$data.kucun}">-->
+                <span onclick="plus()">+</span>
+
+                <span class="heji2">合计:</span><span class="he">0</span><span class="yuan">元</span>
+                <button class="btn" onclick="Buy()">立即购买</button>
+            </div>
+        </section>
+        
+            <div class="wrap">
+                <div class="tabs">
+                    <a hidefocus="true" class="active">商品详情</a>
+                    <a hidefocus="true">产品参数</a>
+                    <a hidefocus="true">售后保障</a>
+                </div>    
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                    <div class="content-slide">
+                        {$data.xiangqing|html_entity_decode=###}
+                        <!--<img src="{$data.img_path}" style="width: 100%;">
+                        <img src="{$data.img_path}" style="width: 100%;">-->
+                    </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="content-slide">
+                        {$data.canshu}
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="content-slide">
+                        {$data.baozhang}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
+<style>
+    body{width: 100%;height:100%;margin:0;}
+    .heji2 {
+        font-size: 0.4rem;margin-left: 36px;margin-right:5px
+    }
+ #name{width:100%;display: inline-block;}
+    .yuan{font-size: 0.4rem;margin-left:5px}
+    .box{position: absolute;list-style: none;left:0;top:0;padding:0;margin:0;}
+    .box li{float:left;}
+    .box li img{display:block;width:100%;height:100%;}
+    .prodectName{margin:0.2rem;font-size:0.3rem;width:80%;overflow: hidden}
+    .prodectPrice{margin:0.1rem;}
+    .prodectPrice span{color:red;font-size: 0.6rem}
+    .prodectNum{font-size:0.5rem;margin: 0.2rem}
+    .btn{margin-top:4px;float:right;margin-right:0.3rem;background:orangered;font-size:0.3rem;width:1.5rem;outline:none;border:none;color:#fff;height:0.6rem;line-height: 0.6rem}
+    .num{width:0.8rem;text-align: center;height:0.6rem;font-size: 0.4rem}
+    .lineBorder{ height: 2px; overflow: hidden; border-bottom:1px solid #099; background: #f3f3f3}
+    .lineDiv{ background: #099; height: 2px; width: 33%;}
+</style>
+<script src="__JS__/jquery-2.1.4.min.js"></script> 
+<script src="__JS__/idangerous.swiper.js"></script>
+<script>
+
+
+    var aLi = document.querySelectorAll(".box li");
+    var box = document.querySelector('.box');
+    var wrap = document.querySelector('.wrap');
+    var aLiWidth = box.offsetWidth;
+    wrap.style.height = aLi[0].offsetHeight + 'px';
+    // 设置盒子的宽度
+    box.style.width = aLi.length*100 + '%';
+    for(var i=0;i<aLi.length;i++){
+        aLi[i].style.width = 1/aLi.length * 100 + '%';
+    };
+    // 初始化手指坐标点
+    var startPoint = 0;
+    var startEle = 0;
+    //手指按下
+    wrap.addEventListener("touchstart",function(e){
+        startPoint = e.changedTouches[0].pageX;
+        startEle = box.offsetLeft;
+    });
+    //手指滑动
+    wrap.addEventListener("touchmove",function(e){
+        var currPoint = e.changedTouches[0].pageX;
+        var disX = currPoint - startPoint;
+        var left = startEle + disX;
+        box.style.left = left + 'px';
+    });
+    wrap.addEventListener("touchend",function(e){
+        var left = box.offsetLeft;
+        var currNum = Math.round(-left/aLiWidth);
+        currNum = currNum>=(aLi.length-1) ? aLi.length-1 : currNum;
+        currNum = currNum<=0 ? 0 : currNum;
+        box.style.left = -currNum*wrap.offsetWidth + 'px';
+    })
+    //商品数量增加
+    function plus(){
+        // alert(0);
+        var num = document.getElementById("num");
+        var new_num = document.getElementById("num").value;
+        var goods_num = document.getElementById("goods_num").value;
+           new_num++;
+        if(new_num == goods_num)
+        {
+            alert('已经是最大库存');
+            return false;
+        }
+            var jiage = $("#jiage").text();
+            var heji =new_num*jiage;
+            $('.he').text(heji);
+            num.innerHTML = num.value++;
+       
+    }
+    //商品数量减少
+    function minus(){
+        var num = document.getElementById("num");
+        var new_num = document.getElementById("num").value;
+        var goods_num = document.getElementById("goods_num").value;
+          if(new_num-- <1)
+          {
+              new_num=0;
+          }
+        var jiage = $("#jiage").text();
+        var heji =new_num*jiage;
+        $('.he').text(heji);
+        // alert(num.value);
+        if(num.value<1){
+            num.innerHTML = 0;
+        }else{
+            num.innerHTML = num.value--;
+        }
+    }
+
+    //tab切换
+    var tabsSwiper = new Swiper('.swiper-container',{
+	speed:500,
+	onSlideChangeStart: function(){
+		$(".tabs .active").removeClass('active');
+		$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+	}
+});
+
+$(".tabs a").on('touchstart mousedown',function(e){
+	e.preventDefault()
+	$(".tabs .active").removeClass('active');
+	$(this).addClass('active');
+	tabsSwiper.swipeTo($(this).index());
+});
+
+$(".tabs a").click(function(e){
+	e.preventDefault();
+});
+//购买按钮
+function Buy()
+{
+    // alert(1)
+    var user = $("#user").val();
+    if(user==false)
+    {
+        alert('请先登录');
+        location.href="{:url('/login')}?shop="+1;
+    }else
+    {
+        //购买商品数量
+        var num = $("#num").val();
+        var name = $("#name").text();
+        var jiage = $(".he").text();
+        var danjia = $("#jiage").text();
+        // alert(jiage)
+        var i_id = $("#i_id").val();
+        var url = "{:url('/goods_buy')}";
+        var data = {'insence_name':name,'jiage':jiage,'goods_id':i_id,'num':num,'danjia':danjia};
+        $.post(url,data,function(msg){
+            // alert(msg)
+            if(msg != false)
+            {
+                // var id = $("#i_id").val();
+                // window.open('indent?id='+id);
+                location.href="{:url('/indent')}?id="+msg;
+                
+            }else
+            {
+                alert('网络开小差了，稍后试试看');
+                history.go(-1);
+            }
+        })
+    }
+    
+    
+}
+    
+</script>
+<!--内容图片限制-->
+<script>
+$(".content-slide img").width("80%")
+
+</script>

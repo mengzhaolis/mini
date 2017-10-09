@@ -1,0 +1,170 @@
+/*ȷ�϶�������*/
+.shure {
+    width: 100%;
+    height: 50px;
+    background-color: #ff5700;
+}
+.shure img{
+    float: left;
+    margin-top: 10px;
+    margin-left: 18px;
+    width: 30px;
+    height: 30px;
+}
+.shure p{
+    float: right;
+    color:#fff;
+    font-size: 20px;
+    line-height: 50px;
+    margin-right:20px;
+}
+
+/*�ջ�����Ϣ*/
+.consignee .xiangxi_xinxi{
+    height: 30px;
+    padding-top: 20px;
+}
+.consignee span{
+    float: left;
+    margin-left: 20px;
+}
+.consignee p{
+    float: right;
+    margin-right: 20px;
+}
+.consignee img {
+    float: left;
+    display: inline-block;
+    margin-left: 18px;
+    width: 30px;
+    height: 30px;
+}
+.consignee .adress {
+    float: left;
+    margin-left: 10px;
+   width:80%;
+    margin-bottom: 20px;
+}
+.hengxian {
+    width: 100%;
+    height: 10px;
+    background-color: #f4f4f4;
+}
+
+/*������Ϣ*/
+.goumai_xinxi img.dianpu{
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+
+}
+.goumai_xinxi{
+    overflow:hidden ;
+    margin-top: 10px;
+
+}
+.goumai_xinxi p {
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.goumai_xinxi .juti {
+    background-color: #f4f4f4;
+    clear:both;
+    padding:10px 0;
+    overflow: hidden;
+
+}
+.goumai_xinxi .juti img{
+    float: left;
+    width:25%;
+    margin-left: 20px;
+    border:1px solid #dcdbdb;
+    padding:0 5px;
+    box-sizing: border-box;
+}
+.goumai_xinxi .juti .jieshao{
+    float: left;
+    width: 60%;
+}
+.goumai_xinxi .juti .jieshao span{
+    display: inline-block;
+}
+.goumai_xinxi .juti .jieshao .taocan_leixing{
+    font-size: 13px;
+    color:#767677;
+    margin:8px 0;
+}
+.goumai_xinxi .juti .jieshao .jiage{
+    color:red;
+    font-size: 16px;
+
+}
+.goumai_xinxi .juti .jieshao .fenshu{
+    float: right;
+}
+.goumai_xinxi .goumai_shuliang{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #cdcdd0;
+    padding-bottom: 5px;
+}
+.goumai_xinxi .goumai_shuliang .buy{
+    float: left;
+    margin-left: 20px;
+}
+.goumai_xinxi .goumai_shuliang .shuju {
+    float: right;
+    margin-right: 20px;
+
+}
+.goumai_xinxi .goumai_shuliang .shuju .jian{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #f4f4f4;line-height: 25px;
+    text-align: center;
+    font-size: 20px;
+    color:#767677;
+}
+.goumai_xinxi .goumai_shuliang .shuju .jia{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #f4f4f4;line-height: 25px;
+    text-align: center;
+    font-size: 20px;
+    color:#767677;
+}
+.goumai_xinxi .goumai_shuliang .shuju .shuzi {
+    margin:0 10px;
+    display: inline-block;
+}
+.goumai_xinxi .heji {
+    height: 60px;
+    margin-top: 15px;
+}
+.goumai_xinxi .heji p{
+     color:red;
+     font-size: 16px;
+    float: right;
+    margin-right: 20px;
+ }
+.goumai_xinxi .heji p span{
+    color:#333;
+    font-size: 14px;
+}
+.goumai_xinxi .heji input {
+    float: right;
+    margin-right: 20px;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #77db85;
+    color:#fff
+}
+
+
