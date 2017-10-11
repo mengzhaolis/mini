@@ -10,6 +10,7 @@ use think\Session;
 
 Class Index
 {
+    public $useres = '';
     public function index()
     {
         /*
@@ -18,31 +19,24 @@ Class Index
         $banner= model('MIndex')->t_banner();
         return view('index',['banner' => $banner]);
     }
-    public function login(Request $request)
+    //正常页验证登陆
+    public function l(Request $request)
     {
-        $data = $request->param();
+        $data = $request->post();
+        // var_dump($data);die;
         if(!empty($data['shop']))
         {
-            $username = Db::table('user')->where('username','=',$data['Username'])->find();
-            if(empty($username))
+            if(!empty($data['test']))
             {
-                return '<script>alert("用户名不存在");window.location.href="login.html"</script>';
-                
-            }else if($username['password'] == $data['Password'])
-            {
-                Session::set($username['id'],$username['id']);
-                Session::set($username['username'],$username['username']);
-                return '<script>alert("登陆成功");history.back()"</script>';
-                // var_dump(Session::get('username'));die;
-                
-            }else
-            {
-                return '<script>alert("密码错误！！！");window.location.href="login.html"</script>';
+                Session::set('url',$data['test']);
             }
-        }else
-        {
-            return view('login');
+            return 1;
         }
+        
+    }
+    public function login(Request $request)
+    {
+           return view('login');
         
     }
     //执行登陆功能
@@ -50,6 +44,7 @@ Class Index
     {
         $data = $request->post();
         // var_dump($data);die;
+        
         $username = Db::table('user')->where('username','=',$data['Username'])->find();
         if(empty($username))
         {
@@ -57,27 +52,22 @@ Class Index
             
         }else if($username['password'] == $data['Password'])
         {
-            Session::set($username['id'],$username['id']);
-            Session::set($username['username'],$username['username']);
-            if($data['type']==1)
+            $user = $username['username'];
+            // $this->useres = $user;
+            $id = $username['id'];
+            Session::set("$id",$username['id']);
+            Session::set("$user",$username['username']);
+            // var_dump(Session::get("$user"));die;
+            if(!empty(Session::get($username['id']) || !empty($username['username'])))
             {
-                $username = Db::table('user')->where('username','=',$data['Username'])->find();
-                if(empty($username))
-                {
-                    return '<script>alert("用户名不存在");window.location.href="login.html"</script>';
-                    
-                }else if($username['password'] == $data['Password'])
-                {
-                    Session::set($username['id'],$username['id']);
-                    Session::set($username['username'],$username['username']);
-                    return 1;
-                }
-            }else
-            {
-               return '<script>alert("登陆成功！！！");window.location.href="/"</script>';
+                $url = Session::get('url');
+
+                // var_dump($url);die;
+                echo '<script>alert("登陆成功！！！");</script>';
+                echo '<script language="javascript">location.href="' . $url . '"; </script>';
             }
-            // var_dump(Session::get('username'));die;
             
+            // var_dump(Session::get('username'));die;
         }else
         {
             return '<script>alert("密码错误！！！");window.location.href="login.html"</script>';
