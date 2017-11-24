@@ -50,6 +50,8 @@ Route::get('var','index/Ver/C');
 Route::any('/','mini/Index/index');
 //用户登录注册页
 Route::any('login','mini/Index/login');
+Route::any('l','mini/Index/l');
+
 //用户登录执行功能
 Route::post('login_in','mini/Index/login_in');
 //用户注册页面
