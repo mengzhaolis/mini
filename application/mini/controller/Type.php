@@ -43,7 +43,7 @@ class Type
                 $da[] = $val['son'];
             }
         }
-        // print_r($da);die;
+        print_r($da);die;
         $banner= model('MIndex')->t_banner();
 
         return view('sort',['first'=>$arr,'banner'=>$banner,'forstone'=>$da]);
