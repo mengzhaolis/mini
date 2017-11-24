@@ -72,3 +72,4 @@ Route::post('alipay','mini/Alipays/pay');
 Route::any('payok','mini/alipays/payok');
 //商品分类递归
 Route::any('digui','mini/Type/data');
+Route::any('type','mini/Type/type_one');
