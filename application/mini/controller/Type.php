@@ -30,6 +30,23 @@ class Type
         
         return $tree;
     }
+    public function type_one()
+    {
+        //查询一级类
+        $data = Db::table('class')->select();
+        $arr=$this->digui($data,0,0);
+        //图片
+        $banner= model('MIndex')->t_banner();
+        //商品数据
+        $shop = Db::table('insence')->alias('i')->join('class c','i.id=c.goods_id')->join('images img','i.image=img.id')->select();
+        // print_r($shop);die;
+        // foreach($arr as $k=>$v)
+        // {
+        //     $shopp[] = $v['son'];
+        // }
+        // print_r($shopp);die;
+        return view('sort',['first'=>$arr,'banner'=>$banner,'firstone'=>$shop]);
+    }
 
 }
 
