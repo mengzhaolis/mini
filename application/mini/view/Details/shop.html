@@ -30,7 +30,6 @@
         <section>
             <div class="prodectName">
                 <span id="name"> {$goods.name}</span>
-               <input type="text" id="user" value="<?php echo '此处为session读取用来判断是否登陆' ; ?>">
             </div>
             <div class="prodectPrice">
                 <span>￥</span><span id="jiage">{$goods.jiage}</span>
@@ -195,49 +194,43 @@ $(".tabs a").click(function(e){
 //购买按钮
 function Buy()
 {
-    var user = $("#user").val();
-    alert(user)
-    if(user==false)
+   //检测用户是否登陆
+   var test = window.location.href;
+   var url = "{:url('/l')}";
+   var data = {'test':test};
+   $.post(url,data,function(msg){
+    if(msg==true)
     {
-        alert('请先登录');
-        var shop = 1;
-        var url = "{:url('/l')}";
-        var test = window.location.href;
-        var data = {'shop':shop,'test':test};
+        //购买商品数量
+        var num = $("#num").val();
+        var name = $("#name").text();
+        var jiage = $(".he").text();
+        var danjia = $("#jiage").text();
+        // alert(jiage)
+        var i_id = $("#i_id").val();
+        var url = "{:url('/goods_buy')}";
+        var data = {'insence_name':name,'jiage':jiage,'goods_id':i_id,'num':num,'danjia':danjia};
         $.post(url,data,function(msg){
-            // alert(msg)
-            if(msg==1)
-            {
-                location.href="{:url('/login')}";
-            }else if(msg == 2)
-            {
-                //购买商品数量
-                var num = $("#num").val();
-                var name = $("#name").text();
-                var jiage = $(".he").text();
-                var danjia = $("#jiage").text();
-                // alert(jiage)
-                var i_id = $("#i_id").val();
-                var url = "{:url('/goods_buy')}";
-                var data = {'insence_name':name,'jiage':jiage,'goods_id':i_id,'num':num,'danjia':danjia};
-                $.post(url,data,function(msg){
-                    // alert(msg)
-                    if(msg != false)
-                    {
-                        // var id = $("#i_id").val();
-                        // window.open('indent?id='+id);
-                        location.href="{:url('/indent')}?id="+msg;
-                        
-                    }else
-                    {
-                        alert('网络开小差了，稍后试试看');
-                        history.go(-1);
-                    }
-                })
-            }
-        });
-        // location.href="?shop="+1;
+        // alert(msg)
+        if(msg != false)
+        {
+        // var id = $("#i_id").val();
+        // window.open('indent?id='+id);
+        location.href="{:url('/indent')}?id="+msg;
+        }else
+        {
+        alert('网络开小差了，稍后试试看');
+        history.go(-1);
+        }
+        })
+    }else
+    {
+        alert('请先登录!!!')
+        location.href="{:url('/login')}";
     }
+   })
+        // location.href="?shop="+1;
+    
     
     
 }
