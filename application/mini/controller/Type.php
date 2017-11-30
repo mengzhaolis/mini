@@ -45,7 +45,10 @@ class Type
         //     $shopp[] = $v['son'];
         // }
         // print_r($shopp);die;
-        return view('sort',['first'=>$arr,'banner'=>$banner,'firstone'=>$shop]);
+        //查询品牌推荐中的数据
+        $recommend = Db::table('insence')->order('id desc')->limit('9')->field('id,name')->select();
+        // print_r($recommend);die;
+        return view('sort',['first'=>$arr,'banner'=>$banner,'firstone'=>$shop,'recommend'=>$recommend]);
     }
 
 }

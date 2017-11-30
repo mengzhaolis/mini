@@ -7,7 +7,7 @@
 	width: 100%;
 	max-width: 640px;
 	border-bottom: 1px solid #bfbfbf;
-	background: url(../images/header-bg.png) repeat-x;
+	background: url("../images/type/header-bg.png") repeat-x;
 	position: fixed;
 	top: 0;
 	z-index: 20;
@@ -46,7 +46,7 @@
 	-webkit-background-origin: content-box;
 }
 .sort-page .more-icon {
-	background: url("../images/search.png") 13px 49px;
+	background: url("../images/type/search.png") 13px 49px;
 	width: 23px;
 	height: 26px;
 	-webkit-background-size: 26px ;
